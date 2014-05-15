@@ -1,4 +1,4 @@
-package mockito;
+package tdd;
 
 public class User {
 

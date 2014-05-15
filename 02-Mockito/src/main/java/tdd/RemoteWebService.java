@@ -1,4 +1,6 @@
-package mockito;
+package tdd;
+
+import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,5 +11,11 @@ package mockito;
  */
 public interface RemoteWebService {
 
+    User findUserById(String id);
+
     Data getData(User user);
+
+    void saveUser(User user);
+
+    User updateData(User user, Data data) throws IOException;
 }
