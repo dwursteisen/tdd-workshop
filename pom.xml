@@ -12,9 +12,9 @@
     <modules>
         <module>01-TDD</module>
         <module>02-Mockito</module>
-        <module>03-DbSetup</module>
-        <module>04-Cucumber</module>
-        <module>GildedRose</module>
+        <module>03-GildedRose</module>
+        <module>04-DbSetup</module>
+        <module>05-Cucumber</module>
     </modules>
 
 
