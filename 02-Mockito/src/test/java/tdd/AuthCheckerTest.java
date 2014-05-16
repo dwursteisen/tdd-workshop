@@ -2,6 +2,7 @@ package tdd;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
@@ -19,6 +20,7 @@ public class AuthCheckerTest {
         checker = new AuthChecker(service);
     }
 
+    @Ignore
     @Test
     public void should_create_user() {
         // TODO: use argument captor !
@@ -31,6 +33,7 @@ public class AuthCheckerTest {
         assertThat(argument.getValue().getId()).isEqualTo("userId");
     }
 
+    @Ignore
     @Test
     public void should_not_be_autorized() {
         // TODO: use mock
@@ -38,6 +41,7 @@ public class AuthCheckerTest {
         Assertions.assertThat(autorized).isFalse();
     }
 
+    @Ignore
     @Test
     public void should_be_autorized() {
         // TODO: use mock
@@ -45,6 +49,7 @@ public class AuthCheckerTest {
         Assertions.assertThat(autorized).isTrue();
     }
 
+    @Ignore
     @Test
     public void should_be_autorized_with_answer() {
         // TODO: use mock and answer on

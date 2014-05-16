@@ -21,10 +21,21 @@ public class UserRepository {
 
     public User findUserById(String id) throws SQLException {
 
-        PreparedStatement statement = ctx.prepareStatement("SELECT id, name FROM users");
-        ResultSet resultSet = statement.executeQuery();
+        PreparedStatement statement = ctx.prepareStatement("SELECT id, userName FROM users WHERE id=?");
+        statement.setString(1, id);
 
-        return null;
+        ResultSet resultSet = statement.executeQuery();
+        if(!resultSet.next()) {
+            return null;
+        }
+
+
+        User user = new User();
+
+        user.setId(resultSet.getString("id"));
+        user.setName(resultSet.getString("userName"));
+
+        return user;
 
     }
 }

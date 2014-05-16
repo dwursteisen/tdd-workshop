@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.*;
+
 /**
  * User: david.wursteisen
  * Date: 15/05/14
@@ -20,28 +22,38 @@ import org.junit.Test;
 public class DataBaseTest {
 
     private static Connection ctx;
+    private static JDBCDataSource datasource;
 
     @BeforeClass
     public static void setUpclass() throws Exception {
-        JDBCDataSource datasource = new JDBCDataSource();
+        datasource = new JDBCDataSource();
         datasource.setUrl("jdbc:hsqldb:mem:mymemdb");
         datasource.setUser("SA");
         datasource.setPassword("");
 
         ctx = datasource.getConnection();
 
-        Operation operation = Operations.sql("CREATE TABLE users (id VARCHAR(255), name VARCHAR(255))");
+        Operation operation = Operations.sql("CREATE TABLE users (id VARCHAR(255), userName VARCHAR(255))");
         DbSetup dbSetup = new DbSetup(new DataSourceDestination(datasource), operation);
         dbSetup.launch();
     }
 
     @Before
     public void setUp() {
-        // fill the database
+        Operation operation = Operations.insertInto("users").columns("id", "userName").values("AZERTY", "Azerty").build();
+        DbSetup dbSetup = new DbSetup(new DataSourceDestination(datasource), operation);
+        dbSetup.launch();
     }
 
     @Test
     public void should_test() throws SQLException {
-        new UserRepository(ctx).findUserById("BLA");
+        User user = new UserRepository(ctx).findUserById("BLA");
+        assertThat(user).isNull();
+    }
+
+    @Test
+    public void should_test2() throws SQLException {
+        User user = new UserRepository(ctx).findUserById("AZERTY");
+        assertThat(user).isNotNull();
     }
 }
