@@ -11,8 +11,12 @@ public class AuthChecker {
         this.service = service;
     }
 
-    public boolean isAutorized(String userId, String password) {
-        User user = service.findUserById(userId);
+
+    public boolean isUserExist(String userId) {
+        return service.findUserById(userId) != null;
+    }
+
+    public boolean isAutorized(User user, String password) {
         Data data = service.getData(user);
         return data.isPasswordEquals(password);
     }

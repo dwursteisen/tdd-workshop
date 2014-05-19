@@ -11,6 +11,9 @@ import org.hsqldb.jdbc.JDBCDataSource;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -46,13 +49,13 @@ public class DataBaseTest {
     }
 
     @Test
-    public void should_test() throws SQLException {
+    public void should_not_find_user() throws SQLException {
         User user = new UserRepository(ctx).findUserById("BLA");
         assertThat(user).isNull();
     }
 
     @Test
-    public void should_test2() throws SQLException {
+    public void should_find_user() throws SQLException {
         User user = new UserRepository(ctx).findUserById("AZERTY");
         assertThat(user).isNotNull();
     }

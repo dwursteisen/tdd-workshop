@@ -39,7 +39,7 @@ public class AccountSteps {
     }
 
     @Alors("^le montant du compte est porté à (\\d+) €.$")
-    public void check_bank_account_amount(int amount) throws Throwable {
+    public void check_bank_account_amount(BigDecimal amount) throws Throwable {
         // Express the Regexp above with the code you wish you had
         throw new PendingException();
     }
