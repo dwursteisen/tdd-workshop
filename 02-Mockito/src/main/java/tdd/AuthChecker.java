@@ -27,9 +27,9 @@ public class AuthChecker {
         service.saveUser(user);
     }
 
-    public User updateUser(User user, String description) {
-        Data data = service.getData(user);
+    public User updateUser(User user, String password) {
         try {
+            Data data = new Data(password, user.getId());
             return service.updateData(user, data);
         } catch (IOException e) {
             return null;
