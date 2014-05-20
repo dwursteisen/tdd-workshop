@@ -68,7 +68,6 @@ public class AuthCheckerTest {
     }
 
     // utilisation de verify
-    // argument captor
 
     @Test
     public void should_be_autorized() {
@@ -79,6 +78,7 @@ public class AuthCheckerTest {
 
         boolean autorized = checker.isAutorized(new User("userId"), "password");
         Assertions.assertThat(autorized).isTrue();
+        Mockito.verify(service).getData(user);
     }
 
     @Test
@@ -93,16 +93,7 @@ public class AuthCheckerTest {
     }
 
 
-
-
-    @Ignore
-    @Test
-    public void should_be_autorized_with_answer() {
-        // TODO: use mock and answer on
-        boolean autorized = checker.isAutorized(new User("userId"), "password");
-        Assertions.assertThat(autorized).isTrue();
-    }
-
+    // argument captor
     @Test
     public void should_create_user() {
         // TODO: use argument captor !
@@ -113,5 +104,16 @@ public class AuthCheckerTest {
         verify(service).saveUser(argument.capture());
 
         assertThat(argument.getValue().getId()).isEqualTo("userId");
+    }
+
+
+    // answser
+    @Test
+    public void should_be_autorized_with_answer() {
+        // TODO: use mock and answer on
+        User user = new User("userId");
+        doAnswer(RETURNS_MOCKS).when(service).getData(user);
+        boolean autorized = checker.isAutorized(user, "password");
+        Assertions.assertThat(autorized).isFalse();
     }
 }
