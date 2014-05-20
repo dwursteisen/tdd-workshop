@@ -36,6 +36,7 @@ public class DataBaseTest {
 
         ctx = datasource.getConnection();
 
+        // création de la table qui va bien
         Operation operation = Operations.sql("CREATE TABLE users (id VARCHAR(255), userName VARCHAR(255))");
         DbSetup dbSetup = new DbSetup(new DataSourceDestination(datasource), operation);
         dbSetup.launch();
@@ -43,7 +44,8 @@ public class DataBaseTest {
 
     @Before
     public void setUp() {
-        Operation operation = Operations.insertInto("users").columns("id", "userName").values("AZERTY", "Azerty").build();
+        // insertion de données dans la base
+        Operation operation = null;
         DbSetup dbSetup = new DbSetup(new DataSourceDestination(datasource), operation);
         dbSetup.launch();
     }

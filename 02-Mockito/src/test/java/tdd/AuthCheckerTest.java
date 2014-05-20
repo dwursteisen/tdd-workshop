@@ -17,6 +17,12 @@ public class AuthCheckerTest {
     private RemoteWebService service;
     private AuthChecker checker;
 
+    /**
+     * Use only for compiling
+     */
+    @Deprecated
+    private final User replaceMe = null;
+
     @Before
     public void setUp() throws Exception {
         service = mock(RemoteWebService.class);
@@ -32,13 +38,11 @@ public class AuthCheckerTest {
      */
     @Test
     public void user_should_exist() {
-        doReturn(new User("azerty")).when(service).findUserById("azerty");
         Assertions.assertThat(checker.isUserExist("azerty")).isTrue();
     }
 
     @Test
     public void user_should_not_exist() {
-        doReturn(null).when(service).findUserById("azerty");
         Assertions.assertThat(checker.isUserExist("azerty")).isFalse();
     }
 
@@ -50,70 +54,55 @@ public class AuthCheckerTest {
     @Test
     public void should_update_user() throws IOException {
 
-        User user = new User("azerty");
-
-        Mockito.doReturn(user).when(service).updateData(Mockito.eq(user), Mockito.any(Data.class));
-        User result = checker.updateUser(user, "description");
-        Assertions.assertThat(result).isSameAs(user);
+        User result = checker.updateUser(replaceMe, "description");
+        Assertions.assertThat(result).isSameAs(replaceMe);
 
     }
 
     @Test
     public void should_update_user_with_exception() throws IOException {
-        User user = new User("azerty");
-
-        Mockito.doThrow(new IOException("Boom")).when(service).updateData(Mockito.eq(user), Mockito.any(Data.class));
-        User result = checker.updateUser(user, "description");
+        User result = checker.updateUser(replaceMe, "description");
         Assertions.assertThat(result).isNull();
     }
 
-    // utilisation de verify
 
+    /**
+     * Via Mockito, il est possible d'utiliser Verify pour être sûr si le bon service a été appelé (ou non) correctement
+     */
     @Test
     public void should_be_autorized() {
-        // TODO: use mock
-        User user = new User("userId");
-
-        doReturn(new Data("password", "userId")).when(service).getData(user);
 
         boolean autorized = checker.isAutorized(new User("userId"), "password");
         Assertions.assertThat(autorized).isTrue();
-        Mockito.verify(service).getData(user);
+        Mockito.verify(service).getData(replaceMe);
     }
 
     @Test
     public void should_not_be_autorized() {
-        // TODO: use mock
-        User user = new User("userId");
 
-        doReturn(new Data("fakePassword", "userId")).when(service).getData(user);
-
-        boolean autorized = checker.isAutorized(user, "password");
+        boolean autorized = checker.isAutorized(replaceMe, "password");
         Assertions.assertThat(autorized).isFalse();
     }
 
 
-    // argument captor
+    /**
+     * Utiliser Argument Captor pour vérifier que le user a correctement été créé
+     */
     @Test
     public void should_create_user() {
-        // TODO: use argument captor !
 
         checker.createNewUser("userId");
 
-        ArgumentCaptor<User> argument = ArgumentCaptor.forClass(User.class);
-        verify(service).saveUser(argument.capture());
-
-        assertThat(argument.getValue().getId()).isEqualTo("userId");
+//        assertThat(argument.getValue().getId()).isEqualTo("userId");
     }
 
 
-    // answser
+    /**
+     * Il est possible d'utiliser des Answser pour configurer un mock
+     */
     @Test
     public void should_be_autorized_with_answer() {
-        // TODO: use mock and answer on
-        User user = new User("userId");
-        doAnswer(RETURNS_MOCKS).when(service).getData(user);
-        boolean autorized = checker.isAutorized(user, "password");
+        boolean autorized = checker.isAutorized(replaceMe, "password");
         Assertions.assertThat(autorized).isFalse();
     }
 }

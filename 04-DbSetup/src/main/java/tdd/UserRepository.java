@@ -21,7 +21,8 @@ public class UserRepository {
 
     public User findUserById(String id) throws SQLException {
 
-        PreparedStatement statement = ctx.prepareStatement("SELECT id, userName FROM users WHERE id=?");
+        // TODO: mettre la bonne requête SQL
+        PreparedStatement statement = ctx.prepareStatement("??????????");
         statement.setString(1, id);
 
         ResultSet resultSet = statement.executeQuery();

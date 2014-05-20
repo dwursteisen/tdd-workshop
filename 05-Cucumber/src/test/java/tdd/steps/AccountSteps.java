@@ -20,8 +20,6 @@ import static org.assertj.core.api.Assertions.*;
 public class AccountSteps {
 
 
-    private BankAcount bankAcount;
-
     @Before
     public void setUp() {
 
@@ -34,17 +32,17 @@ public class AccountSteps {
 
     @Étantdonné("^un compte avec (\\d+) €,$")
     public void init_bank_account_with(BigDecimal amount) throws Throwable {
-        bankAcount = new BankAcount(amount);
+        throw new RuntimeException();
     }
 
     @Quand("^l’utilisateur effectue un dépôt de (\\d+) €,$")
     public void deposit_on_account(BigDecimal amount) throws Throwable {
-        bankAcount.deposit(amount);
+        throw new RuntimeException();
     }
 
     @Alors("^le montant du compte est porté à (\\d+) €.$")
     public void check_bank_account_amount(BigDecimal amount) throws Throwable {
-        assertThat(bankAcount.getAmount()).isEqualTo(amount);
+        throw new RuntimeException();
     }
 
 }
