@@ -20,10 +20,15 @@ public class BankAcount {
     }
 
     public boolean deposit(BigDecimal amount) {
+        this.amount = this.amount.add(amount);
         return false;
     }
 
     public boolean withdraw(BigDecimal amount) {
         return false;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
     }
 }

@@ -8,6 +8,9 @@ import cucumber.api.java.Before;
 import cucumber.api.java.fr.Alors;
 import cucumber.api.java.fr.Quand;
 import cucumber.api.java.fr.Étantdonné;
+import tdd.BankAcount;
+
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * User: david.wursteisen
@@ -16,8 +19,11 @@ import cucumber.api.java.fr.Étantdonné;
  */
 public class AccountSteps {
 
+
+    private BankAcount bankAcount;
+
     @Before
-    public void setUp()  {
+    public void setUp() {
 
     }
 
@@ -28,20 +34,17 @@ public class AccountSteps {
 
     @Étantdonné("^un compte avec (\\d+) €,$")
     public void init_bank_account_with(BigDecimal amount) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+        bankAcount = new BankAcount(amount);
     }
 
     @Quand("^l’utilisateur effectue un dépôt de (\\d+) €,$")
     public void deposit_on_account(BigDecimal amount) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+        bankAcount.deposit(amount);
     }
 
     @Alors("^le montant du compte est porté à (\\d+) €.$")
     public void check_bank_account_amount(BigDecimal amount) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+        assertThat(bankAcount.getAmount()).isEqualTo(amount);
     }
 
 }
