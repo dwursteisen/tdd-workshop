@@ -3,7 +3,7 @@
   <groupId>GildedRoseJava</groupId>
   <artifactId>GildedRoseJava</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-
+    <name>03-GildedRose</name>
     <parent>
         <groupId>com.github.dwursteisen</groupId>
         <artifactId>tdd-workshop</artifactId>
