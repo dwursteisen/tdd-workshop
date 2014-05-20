@@ -27,4 +27,34 @@ public class FooBarQix {
             // TODO !
         }
     }
+
+    private int index = 1;
+    public String next() {
+        int current = index++;
+
+        String result = "";
+        result = result + isDividedBy(current, 3, "Foo") + isDividedBy(current, 5, "Bar") +  isDividedBy(current, 7, "Qix");
+        result = result + contains(current, "3", "Foo") + contains(current, "5", "Bar") + contains(current, "7", "Qix");
+        if(result.isEmpty()) {
+            return Integer.toString(current);
+        } else {
+            return result;
+        }
+    }
+
+    private String contains(final int current, final String container, final String appender) {
+        String append = "";
+        if(Integer.toString(current).contains(container)) {
+            append = appender;
+        }
+        return append;
+    }
+
+    private String isDividedBy(final int current, final int divisor, final String appender) {
+        String append = "";
+        if(current % divisor == 0) {
+            append = appender;
+        }
+        return append;
+    }
 }

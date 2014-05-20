@@ -1,5 +1,6 @@
 package tdd;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -36,6 +37,12 @@ public class FooBarQixTest {
      **/
     @Test
     public void should_be_true() {
-        assertThat(true).isTrue(); // yeah, really !
+        FooBarQix iterator = new FooBarQix();
+        Assertions.assertThat(iterator.next()).isEqualTo("1");
+        Assertions.assertThat(iterator.next()).isEqualTo("2");
+        Assertions.assertThat(iterator.next()).isEqualTo("FooFoo");
+        Assertions.assertThat(iterator.next()).isEqualTo("4");
+        Assertions.assertThat(iterator.next()).isEqualTo("BarBar");
+        Assertions.assertThat(iterator.next()).isEqualTo("Foo");
     }
 }
