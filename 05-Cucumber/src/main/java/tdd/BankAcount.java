@@ -10,17 +10,14 @@ import java.math.RoundingMode;
  */
 public class BankAcount {
 
-    private BigDecimal amount = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_DOWN);
 
     public BankAcount() {
     }
 
     public BankAcount(BigDecimal initialAmount) {
-        this.amount = initialAmount;
     }
 
     public boolean deposit(BigDecimal amount) {
-        this.amount = this.amount.add(amount);
         return false;
     }
 
@@ -29,6 +26,6 @@ public class BankAcount {
     }
 
     public BigDecimal getAmount() {
-        return amount;
+        return null;
     }
 }
